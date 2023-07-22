@@ -146,7 +146,7 @@ for color in Colors: print(color)
 <br />
 <br />
 ## Additional Notes
-The following are the currently supports schemes for the `GeneratePallete` function:
+The following are the currently supports schemes for the `GeneratePalette` function:
 - monochromatic
 - analogous
 - complimentary
