@@ -184,9 +184,9 @@ class HEX:
 
 
 
-    def __init__(self, hexidecimal: str):
-        if self.__checkIfHEX(hexidecimal):
-            self.hexidecimal = hexidecimal
+    def __init__(self, hexicode: str):
+        if self.__checkIfHEX(hexicode):
+            self.hexicode = hexicode
             self.__valid = True
         
         else: self.__valid = False
@@ -205,7 +205,7 @@ class HEX:
     @property
     def hexidecimal(self) -> str:
         if not self.__valid: return None
-        return self.hexidecimal
+        return self.hexicode
     
 
     @property
@@ -281,7 +281,7 @@ class HEX:
 
     def __repr__(self):
         if not self.__valid: return 'Invalid HEX'
-        self.hexidecimal
+        self.hexicode
 
 
 
