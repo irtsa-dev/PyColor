@@ -990,4 +990,4 @@ class CMYK:
     
     def __repr__(self):
         if not self.__valid: return 'Invalid CMYK'
-        return str(self.cyan) + '% ' + str(self.magenta) + '% ' + str(self.yellow) + '% ' + str(self.key) + '% '
+        return str(self.cyan) + '% ' + str(self.magenta) + '% ' + str(self.yellow) + '% ' + str(self.key) + '%'
