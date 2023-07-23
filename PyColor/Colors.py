@@ -139,6 +139,17 @@ class RGB:
         K = int(round(K * 100))
 
         return (C, M, Y, K)
+    
+
+    @property
+    def percentForm(self) -> tuple:
+        if not self.__valid: return None
+
+        r = round((self.red / 255.0), 2)
+        g = round((self.green / 255.0), 2)
+        b = round((self.blue / 255.0), 2)
+
+        return (r, g, b)
         
 
 
@@ -184,9 +195,9 @@ class HEX:
 
 
 
-    def __init__(self, hexidecimal: str):
-        if self.__checkIfHEX(hexidecimal):
-            self.hexidecimal = hexidecimal
+    def __init__(self, hexicode: str):
+        if self.__checkIfHEX(hexicode):
+            self.hexicode = hexicode
             self.__valid = True
         
         else: self.__valid = False
@@ -205,7 +216,7 @@ class HEX:
     @property
     def hexidecimal(self) -> str:
         if not self.__valid: return None
-        return self.hexidecimal
+        return self.hexicode
     
 
     @property
@@ -276,12 +287,23 @@ class HEX:
         K = int(round(K * 100))
 
         return (C, M, Y, K)
+
+
+
+    @property
+    def percentForm(self) -> float:
+        Numbers = [int(i, 16) for i in self.hexicode[1:]][::-1]
+        Numbers = [((16 ** i) * Numbers[i]) for i in range(len(Numbers))]
+
+        number = sum(Numbers)
+
+        return round((number / 16777215.0), 3)
     
 
 
     def __repr__(self):
         if not self.__valid: return 'Invalid HEX'
-        self.hexidecimal
+        return self.hexicode
 
 
 
@@ -407,6 +429,17 @@ class HSV:
         K = int(round(K * 100))
 
         return (C, M, Y, K)
+    
+
+    @property
+    def percentForm(self) -> tuple:
+        if not self.__valid: return None
+
+        h = round((self.hue / 360.0), 2)
+        s = round((self.saturation / 100.0), 2)
+        v = round((self.value / 100.0), 2)
+
+        return (h, s, v)
     
 
 
@@ -537,6 +570,17 @@ class HSL:
         K = int(round(K * 100))
 
         return (C, M, Y, K)
+    
+
+    @property
+    def percentForm(self) -> tuple:
+        if not self.__valid: return None
+
+        h = round((self.hue / 360.0), 2)
+        s = round((self.saturation / 100.0), 2)
+        l = round((self.lightness / 100.0), 2)
+
+        return (h, s, l)
     
 
 
@@ -677,6 +721,18 @@ class CMYK:
     def cmyk(self) -> tuple:
         if not self.__valid: return None
         return (self.cyan, self.magenta, self.yellow, self.key)
+    
+
+    @property
+    def percentForm(self) -> tuple:
+        if not self.__valid: return None
+
+        c = round((self.cyan / 100.0), 2)
+        m = round((self.magenta / 100.0), 2)
+        y = round((self.yellow / 100.0), 2)
+        k = round((self.key / 100.0), 2)
+
+        return (c, m, y, k)
 
 
     
