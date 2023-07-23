@@ -39,6 +39,9 @@ rgb.cmyk
 # Returns a tuple of the cmyk values from rgb.
 rgb.hexidecimal
 # Returns a string of the hexidecimal value from rgb.
+
+rgb.percentForm
+# Returns a tuple of the rgb values in a decimal percent form (0-1).
 ```
 ```py
 hsv.rgb
@@ -51,6 +54,9 @@ hsv.cmyk
 # Returns a tuple of the cmyk values from hsv.
 hsv.hexidecimal
 # Returns a string of the hexidecimal value from hsv.
+
+hsv.percentForm
+# Returns a tuple of the hsv values in a decimal percent form (0-1).
 ```
 ```py
 hsl.rgb
@@ -63,6 +69,9 @@ hsl.cmyk
 # Returns a tuple of the cmyk values from hsl.
 hsl.hexidecimal
 # Returns a string of the hexidecimal value from hsl.
+
+hsl.percentForm
+# Returns a tuple of the hsl values in a decimal percent form (0-1).
 ```
 ```py
 cmyk.rgb
@@ -75,6 +84,9 @@ cmyk.cmyk
 # Returns a tuple of the cmyk values from cmyk.
 cmyk.hexidecimal
 # Returns a string of the hexidecimal value from cmyk.
+
+cmyk.percentForm
+# Returns a tuple of the cmyk values in a decimal percent form (0-1).
 ```
 ```py
 hexidecimal.rgb
@@ -87,6 +99,9 @@ hexidecimal.cmyk
 # Returns a tuple of the cmyk values from hexidecimal.
 hexidecimal.hexidecimal
 # Returns a string of the hexidecimal value from hexidecimal.
+
+hexidecimal.percentForm
+# Returns a decimal percent form (0-1) of the hexidecimal value.
 ```
 ```py
 print(rgb)
