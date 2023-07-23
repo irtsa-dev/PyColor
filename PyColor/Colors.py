@@ -38,7 +38,7 @@ class RGB:
     @staticmethod
     def __checkIfRGB(value):
         if any([True for i in value if type(i) != int]): return False
-        if len([i for i in value if i > 0 and i < 255]) != 3: return False
+        if len([i for i in value if i >= 0 and i <= 255]) != 3: return False
         
         return True
 
