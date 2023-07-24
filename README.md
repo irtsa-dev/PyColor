@@ -1,5 +1,5 @@
 # PyColor
-A [**python**](https://www.python.org) collection of classes and functions to convert between **rgb**, **hsv**, **hsl**, **xyz**, **cmyk** and **hex** color formats and generate palettes from said colors.
+A [**python**](https://www.python.org) collection of classes and functions to convert between **rgb**, **hsv**, **hsl**, **xyz**, **cmyk**, and **hex** color formats and generate palettes from said colors.
 <br />
 - **RGB** (*red*, *green*, *blue*)
 - **HSV** (*hue*, *saturation*, *value*)
