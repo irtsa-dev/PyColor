@@ -39,7 +39,7 @@ class RGB:
     def __checkIfRGB(value):
         if any([True for i in value if type(i) != int]): return False
         if len([i for i in value if i >= 0 and i <= 256]) != 3: return False
-        
+
         return True
 
 
@@ -183,7 +183,7 @@ class HEX:
     Takes in a hexidecimal representation of a color as a string that includes the #.
 
     Attributes:
-        hexidecimal (str): A hexidecimal form of a color.
+        hexicode (str): A hexidecimal form of a color.
 
     Valid Examples:
      - HEX("#121212")
