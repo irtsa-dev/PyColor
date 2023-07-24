@@ -38,8 +38,8 @@ class RGB:
     @staticmethod
     def __checkIfRGB(value):
         if any([True for i in value if type(i) != int]): return False
-        if len([i for i in value if i >= 0 and i <= 255]) != 3: return False
-        
+        if len([i for i in value if i >= 0 and i <= 256]) != 3: return False
+
         return True
 
 
@@ -121,6 +121,23 @@ class RGB:
         L = int(round(L * 100.0))
 			
         return (H, S, L)
+    
+
+    @property
+    def xyz(self) -> tuple:
+        if not self.__valid: return None
+
+        r = self.red / 255.0
+        g = self.green / 255.0
+        b = self.blue / 255.0
+
+        rgb = [(((i + 0.055) / 1.055) ** 2.4) if i > 0.04045 else (i / 12.92) for i in [r, g, b]]
+
+        x = round((rgb[0] * 41.24 + rgb[1] * 35.76 + rgb[2] * 18.05), 2)
+        y = round((rgb[0] * 21.26 + rgb[1] * 71.52 + rgb[2] * 7.22), 2)
+        z = round((rgb[0] * 1.93 + rgb[1] * 11.92 + rgb[2] * 95.05), 2)
+
+        return (x, y, z)
 
 
     @property
@@ -272,6 +289,23 @@ class HEX:
     
 
     @property
+    def xyz(self) -> tuple:
+        if not self.__valid: return None
+
+        r = self.rgb[0] / 255.0
+        g = self.rgb[1] / 255.0
+        b = self.rgb[2] / 255.0
+
+        rgb = [(((i + 0.055) / 1.055) ** 2.4) if i > 0.04045 else (i / 12.92) for i in [r, g, b]]
+
+        x = round((rgb[0] * 41.24 + rgb[1] * 35.76 + rgb[2] * 18.05), 2)
+        y = round((rgb[0] * 21.26 + rgb[1] * 71.52 + rgb[2] * 7.22), 2)
+        z = round((rgb[0] * 1.93 + rgb[1] * 11.92 + rgb[2] * 95.05), 2)
+
+        return (x, y, z)
+    
+
+    @property
     def cmyk(self):
         if not self.__valid: return None
 
@@ -411,6 +445,23 @@ class HSV:
         L = int(round(L * 100.0))
 
         return (self.hue, S, L)
+    
+
+    @property
+    def xyz(self) -> tuple:
+        if not self.__valid: return None
+
+        r = self.rgb[0] / 255.0
+        g = self.rgb[1] / 255.0
+        b = self.rgb[2] / 255.0
+
+        rgb = [(((i + 0.055) / 1.055) ** 2.4) if i > 0.04045 else (i / 12.92) for i in [r, g, b]]
+
+        x = round((rgb[0] * 41.24 + rgb[1] * 35.76 + rgb[2] * 18.05), 2)
+        y = round((rgb[0] * 21.26 + rgb[1] * 71.52 + rgb[2] * 7.22), 2)
+        z = round((rgb[0] * 1.93 + rgb[1] * 11.92 + rgb[2] * 95.05), 2)
+
+        return (x, y, z)
     
 
     @property
@@ -555,6 +606,23 @@ class HSL:
     
 
     @property
+    def xyz(self) -> tuple:
+        if not self.__valid: return None
+
+        r = self.rgb[0] / 255.0
+        g = self.rgb[1] / 255.0
+        b = self.rgb[2] / 255.0
+
+        rgb = [(((i + 0.055) / 1.055) ** 2.4) if i > 0.04045 else (i / 12.92) for i in [r, g, b]]
+
+        x = round((rgb[0] * 41.24 + rgb[1] * 35.76 + rgb[2] * 18.05), 2)
+        y = round((rgb[0] * 21.26 + rgb[1] * 71.52 + rgb[2] * 7.22), 2)
+        z = round((rgb[0] * 1.93 + rgb[1] * 11.92 + rgb[2] * 95.05), 2)
+
+        return (x, y, z)
+    
+
+    @property
     def cmyk(self) -> tuple:
         if not self.__valid: return None
 
@@ -587,6 +655,173 @@ class HSL:
     def __repr__(self):
         if not self.__valid: return 'Invalid HSL'
         return str(self.hue) + '° ' + str(self.saturation) + '% ' + str(self.lightness) + '%'
+
+
+
+
+class XYZ:
+    """
+    XYZ color class object. 
+    Takes in cyan, magenta, yellow, and key values.
+
+    Attributes:
+        x (float): A float value between 0-95.05.
+        y (float): A float value between 0-100.0.
+        z (float): A float value between 0-108.9.
+
+        
+    Valid Examples:
+     - XYZ(84.0, 100.0, 102.0)
+     - XYZ(1.0, 30.0, 106.5)
+     - XYZ(53.7, 23.4, 100.0)
+
+    Invalid Examples:
+     - XYZ(100.0, 101.3, 12.7)
+     - XYZ(-3, 29.0, 290.3)
+     - XYZ(-13.2, 113.0, 100.0)
+    """
+
+
+    @staticmethod
+    def __checkifXYZ(value):
+        try: value = [float(i) for i in value if type(i) in [int, float]]
+        except: return False
+
+        if len(value) != 3: return False
+        if any([True for i in value if i < 0]): return False
+        if value[0] > 95.05 or value[1] > 100 or value[2] > 108.9: return False
+        
+        return True
+
+
+        
+    def __init__(self, x: float, y: float, z: float):
+        if self.__checkifXYZ((x, y, z)):
+            self.x = x
+            self.y = y
+            self.z = z
+            self.__valid = True
+        
+        else: self.__valid = False         
+
+
+    @property
+    def rgb(self) -> tuple:
+        if not self.__valid: return None
+
+        r = self.x * 0.032406 - self.y * 0.015372 - self.z * 0.004986
+        g = self.x * -0.009689 + self.y * 0.018758 + self.z * 0.000415
+        b = self.x * 0.000557 - self.y * 0.00204 + self.z * 0.01057
+
+        rgb = [(1.055 * (i ** 0.4167) - 0.055) if i > 0.0031308 else (i * 12.92) for i in [r, g, b]]
+
+        r = int(round(rgb[0] * 255))
+        g = int(round(rgb[1] * 255))
+        b = int(round(rgb[2] * 255))
+
+        return (r, g, b)
+    
+
+    @property
+    def hexidecimal(self) -> str:
+        if not self.__valid: return None
+
+        r = hex(self.rgb[0])[2:].upper()
+        g = hex(self.rgb[1])[2:].upper()
+        b = hex(self.rgb[2])[2:].upper()
+
+        return '#' + ''.join([r, g, b])
+    
+
+    @property
+    def hsv(self) -> tuple:
+        if not self.__valid: return None
+
+        M = max(self.rgb[0], self.rgb[1], self.rgb[2])
+        m = min(self.rgb[0], self.rgb[1], self.rgb[2])
+
+        V = (M / 255) * 100
+
+        S = 0
+        if M > 0: S = 100 - ((m / M) * 100)
+
+        try:
+            H = degrees(acos((self.rgb[0] - (self.rgb[1] / 2) - (self.rgb[2] / 2)) / sqrt((self.rgb[0] ** 2) + (self.rgb[1] ** 2) + (self.rgb[2] ** 2) - (self.rgb[0] * self.rgb[1]) - (self.red * self.rgb[2]) - (self.rgb[1] * self.rgb[2]))))
+            if self.rgb[2] > self.rgb[1]: H = 360 - H
+        except: H = 0
+
+        H = int(round(H))
+        S = int(round(S))
+        V = int(round(V))
+
+        return (H, S, V)
+    
+
+    @property 
+    def hsl(self) -> tuple:
+        if not self.__valid: return None
+
+        M = max([self.rgb[0], self.rgb[1], self.rgb[2]])
+        m = min([self.rgb[0], self.rgb[1], self.rgb[2]])
+
+        M = max([(self.rgb[0] / 255.0), (self.rgb[1] / 255.0), (self.rgb[2] / 255.0)])
+        m = min([(self.rgb[0] / 255.0), (self.rgb[1] / 255.0), (self.rgb[2] / 255.0)])
+
+        C = M - m
+        L = (M + m) / 2.0
+
+        S = 0
+        if C != 0: S = ((C / (1.0 - abs((2.0 * L) - 1.0))) * 100.0)
+		
+        try:
+            H = degrees(acos((self.rgb[0] - (self.rgb[1] / 2) - (self.rgb[2] / 2)) / sqrt((self.rgb[0] ** 2) + (self.rgb[1] ** 2) + (self.rgb[2] ** 2) - (self.rgb[0] * self.rgb[1]) - (self.rgb[0] * self.rgb[2]) - (self.rgb[1] * self.rgb[2]))))
+            if self.rgb[2] > self.rgb[1]: H = 360 - H
+        except: H = 0
+
+        H = int(round(H))
+        S = int(round(S))
+        L = int(round(L * 100.0))
+			
+        return (H, S, L)
+    
+
+    @property
+    def xyz(self) -> tuple:
+        if not self.__valid: return None
+        return (self.x, self.y, self.z)
+    
+
+    @property
+    def cmyk(self):
+        if not self.__valid: return None
+
+        nr = self.rgb[0] / 255.0
+        ng = self.rgb[1] / 255.0
+        nb = self.rgb[2] / 255.0
+
+        K = 1.0 - max(nr, ng, nb)
+
+        C = int(round(((1 - nr - K) / (1 - K) * 100)))
+        M = int(round(((1 - ng - K) / (1 - K) * 100)))
+        Y = int(round(((1 - nb - K) / (1 - K) * 100)))
+        K = int(round(K * 100))
+
+        return (C, M, Y, K)
+
+
+    @property
+    def percentForm(self) -> float:
+        x = round((self.x / 95.05), 2)
+        y = round((self.y / 100.0), 2)
+        z = round((self.z / 108.9), 2)
+
+        return (x, y, z)
+
+
+
+    def __repr__(self):
+        if not self.__valid: return 'Invalid XYZ'
+        return str(self.x) + '% ' + str(self.y) + '% ' + str(self.z) + '%'
 
 
 
@@ -718,6 +953,23 @@ class CMYK:
     
 
     @property
+    def xyz(self) -> tuple:
+        if not self.__valid: return None
+
+        r = self.rgb[0] / 255.0
+        g = self.rgb[1] / 255.0
+        b = self.rgb[2] / 255.0
+
+        rgb = [(((i + 0.055) / 1.055) ** 2.4) if i > 0.04045 else (i / 12.92) for i in [r, g, b]]
+
+        x = round((rgb[0] * 41.24 + rgb[1] * 35.76 + rgb[2] * 18.05), 2)
+        y = round((rgb[0] * 21.26 + rgb[1] * 71.52 + rgb[2] * 7.22), 2)
+        z = round((rgb[0] * 1.93 + rgb[1] * 11.92 + rgb[2] * 95.05), 2)
+
+        return (x, y, z)
+    
+
+    @property
     def cmyk(self) -> tuple:
         if not self.__valid: return None
         return (self.cyan, self.magenta, self.yellow, self.key)
@@ -738,4 +990,4 @@ class CMYK:
     
     def __repr__(self):
         if not self.__valid: return 'Invalid CMYK'
-        return str(self.cyan) + '% ' + str(self.magenta) + '% ' + str(self.yellow) + '% ' + str(self.key) + '% '
+        return str(self.cyan) + '% ' + str(self.magenta) + '% ' + str(self.yellow) + '% ' + str(self.key) + '%'
