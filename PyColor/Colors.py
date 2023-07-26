@@ -929,6 +929,10 @@ class YCC:
         r = int(round((self.y * 1.1643835616 + self.cr * 1.7927410714 - 248.100994), 3))
         g = int(round((self.y * 1.1643835616 + self.cb * -0.2132486143 + self.cr * -0.5329093286 + 76.878080), 3))
         b = int(round((self.y * 1.1643835616 + self.cb * 2.1124017857 - 289.017566), 3))
+
+	r = max(0, min(255, r))
+	g = max(0, min(255, g))
+	b = max(0, min(255, b))
         
         return (r, g, b)
     
