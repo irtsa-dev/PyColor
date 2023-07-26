@@ -1,10 +1,11 @@
 # PyColor
-A [**python**](https://www.python.org) collection of classes and functions to convert between **rgb**, **hsv**, **hsl**, **xyz**, **cmyk**, and **hex** color formats and generate palettes from said colors.
+A [**python**](https://www.python.org) collection of classes and functions to convert between **rgb**, **hsv**, **hsl**, **xyz**, **ycc**, **cmyk** and **hex** color formats and generate palettes from said colors.
 <br />
 - **RGB** (*red*, *green*, *blue*)
 - **HSV** (*hue*, *saturation*, *value*)
 - **HSL** (*hue*, *saturation*, *lightness*)
 - **XYZ** (*x*, *y*, *z*)
+- **YCC** (*y*, *cb*, *cr*)
 - **CMYK** (*cyan*, *magenta*, *yellow*, *key*)
 - **HEX** (*hexidecimal*)
 <br />
@@ -27,6 +28,7 @@ rgb = RGB(100, 100, 100)
 hsv = HSV(200, 100, 100)
 hsl = HSL(200, 100, 100)
 xyz = XYZ(10.0, 10.0, 80.0)
+ycc = YCC(100.0, 150.0, 80.0)
 cmyk = CMYK(100, 100, 100, 100)
 hexidecimal = HEX("#121212")
 ```
@@ -39,6 +41,8 @@ rgb.hsl
 # Retuns a tuple of the hsl values from rgb.
 rgb.xyz
 # Returns a tuple of the xyz values from rgb.
+rgb.ycc
+# Returns a tuple of the ycc values from rgb.
 rgb.cmyk
 # Returns a tuple of the cmyk values from rgb.
 rgb.hexidecimal
@@ -55,7 +59,9 @@ hsv.hsv
 hsv.hsl
 # Retuns a tuple of the hsl values from hsv.
 hsv.xyz
-# Returns a tuple of the xyz values from rgb.
+# Returns a tuple of the xyz values from hsv.
+hsv.ycc
+# Returns a tuple of the ycc values from hsv.
 hsv.cmyk
 # Returns a tuple of the cmyk values from hsv.
 hsv.hexidecimal
@@ -72,7 +78,9 @@ hsl.hsv
 hsl.hsl
 # Retuns a tuple of the hsl values from hsl.
 hsl.xyz
-# Returns a tuple of the xyz values from rgb.
+# Returns a tuple of the xyz values from hsl.
+hsl.ycc
+# Returns a tuple of the ycc values from hsl.
 hsl.cmyk
 # Returns a tuple of the cmyk values from hsl.
 hsl.hexidecimal
@@ -82,6 +90,44 @@ hsl.percentForm
 # Returns a tuple of the hsl values in a decimal percent form (0-1).
 ```
 ```py
+xyz.rgb
+# Returns a tuple of the rgb values from xyz.
+xyz.hsv
+# Returns a tuple of the hsv values from xyz.
+xyz.hsl
+# Retuns a tuple of the hsl values from xyz.
+xyz.xyz
+# Returns a tuple of the xyz values from xyz.
+xyz.ycc
+# Returns a tuple of the ycc values from xyz.
+xyz.cmyk
+# Returns a tuple of the cmyk values from xyz.
+xyz.hexidecimal
+# Returns a string of the hexidecimal value from xyz.
+
+xyz.percentForm
+# Returns a tuple of the xyz values in a decimal percent form (0-1).
+```
+```py
+ycc.rgb
+# Returns a tuple of the rgb values from ycc.
+ycc.hsv
+# Returns a tuple of the hsv values from ycc.
+ycc.hsl
+# Retuns a tuple of the hsl values from ycc.
+ycc.xyz
+# Returns a tuple of the xyz values from ycc.
+ycc.ycc
+# Returns a tuple of the ycc values from ycc.
+ycc.cmyk
+# Returns a tuple of the cmyk values from ycc.
+ycc.hexidecimal
+# Returns a string of the hexidecimal value from ycc.
+
+hsl.percentForm
+# Returns a tuple of the ycc values in a decimal percent form (0-1).
+```
+```py
 cmyk.rgb
 # Returns a tuple of the rgb values from cmyk.
 cmyk.hsv
@@ -89,7 +135,9 @@ cmyk.hsv
 cmyk.hsl
 # Retuns a tuple of the hsl values from cmyk.
 cmyk.xyz
-# Returns a tuple of the xyz values from rgb.
+# Returns a tuple of the xyz values from cmyk.
+cmyk.ycc
+# Returns a tuple of the ycc values from cmyk.
 cmyk.cmyk
 # Returns a tuple of the cmyk values from cmyk.
 cmyk.hexidecimal
@@ -106,7 +154,9 @@ hexidecimal.hsv
 hexidecimal.hsl
 # Retuns a tuple of the hsl values from hexidecimal.
 hexidecimal.xyz
-# Returns a tuple of the xyz values from rgb.
+# Returns a tuple of the xyz values from hexidecimal.
+hexidecimal.ycc
+# Returns a tuple of the ycc values from hexidecimal.
 hexidecimal.cmyk
 # Returns a tuple of the cmyk values from hexidecimal.
 hexidecimal.hexidecimal
@@ -127,6 +177,9 @@ print(hsl)
 
 print(xyz)
 # Will print off a string representation of the xyz values.
+
+print(ycc)
+# Will print off a string representation of the ycc values.
 
 print(cmyk)
 # Will print off a string representation of the cmyk values.
