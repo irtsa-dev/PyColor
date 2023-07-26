@@ -36,7 +36,7 @@ class RGB:
     """
     
     @staticmethod
-    def __checkIfRGB(value):
+    def __checkIfValid(value):
         if any([True for i in value if type(i) != int]): return False
         if len([i for i in value if i >= 0 and i <= 256]) != 3: return False
         
@@ -45,7 +45,7 @@ class RGB:
 
 
     def __init__(self, red: int, green: int, blue: int):
-        if self.__checkIfRGB((red, green, blue)):
+        if self.__checkIfValid((red, green, blue)):
             self.red = red
             self.green = green
             self.blue = blue
@@ -138,6 +138,17 @@ class RGB:
         z = round((rgb[0] * 1.93 + rgb[1] * 11.92 + rgb[2] * 95.05), 2)
 
         return (x, y, z)
+    
+
+    @property
+    def ycc(self) -> tuple:
+        if not self.__valid: return None
+
+        y = round((16 + ((65.738 * self.red) / 256) + ((129.057 * self.green) / 256) + ((25.064 * self.blue) / 256)), 2)
+        cb = round((128 - ((37.945 * self.red) / 256) - ((74.494 * self.green) / 256) + ((112.439 * self.blue) / 256)), 2)
+        cr = round((128 + ((112.439 * self.red) / 256) - ((94.154 * self.green) / 256) - ((18.285 * self.blue) / 256)), 2)
+
+        return (y, cb, cr)
 
 
     @property
@@ -197,7 +208,7 @@ class HEX:
     """
 
     @staticmethod
-    def __checkIfHEX(value):
+    def __checkIfValid(value):
         if type(value) != str: return False
         value = [value[1:][i:i+2] for i in range(0, len(value[1:]), 2)]
 
@@ -213,7 +224,7 @@ class HEX:
 
 
     def __init__(self, hexicode: str):
-        if self.__checkIfHEX(hexicode):
+        if self.__checkIfValid(hexicode):
             self.hexicode = hexicode
             self.__valid = True
         
@@ -303,7 +314,18 @@ class HEX:
         z = round((rgb[0] * 1.93 + rgb[1] * 11.92 + rgb[2] * 95.05), 2)
 
         return (x, y, z)
-    
+
+
+    @property
+    def ycc(self) -> tuple:
+        if not self.__valid: return None
+
+        y = round((16 + ((65.738 * self.rgb[0]) / 256) + ((129.057 * self.rgb[1]) / 256) + ((25.064 * self.rgb[2]) / 256)), 2)
+        cb = round((128 - ((37.945 * self.rgb[0]) / 256) - ((74.494 * self.rgb[1]) / 256) + ((112.439 * self.rgb[2]) / 256)), 2)
+        cr = round((128 + ((112.439 * self.rgb[0]) / 256) - ((94.154 * self.rgb[1]) / 256) - ((18.285 * self.rgb[2]) / 256)), 2)
+
+        return (y, cb, cr)
+        
 
     @property
     def cmyk(self):
@@ -365,7 +387,7 @@ class HSV:
     """
     
     @staticmethod
-    def __checkIfHSV(value):
+    def __checkIfValid(value):
         if any([True for i in value if type(i) != int]): return False
 
         if value[0] < 0 or value[0] > 360: return False
@@ -377,7 +399,7 @@ class HSV:
 
 
     def __init__(self, hue: int, saturation: int, value: int):
-        if self.__checkIfHSV((hue, saturation, value)):
+        if self.__checkIfValid((hue, saturation, value)):
             self.hue = hue
             self.saturation = saturation
             self.value = value
@@ -465,6 +487,17 @@ class HSV:
     
 
     @property
+    def ycc(self) -> tuple:
+        if not self.__valid: return None
+
+        y = round((16 + ((65.738 * self.rgb[0]) / 256) + ((129.057 * self.rgb[1]) / 256) + ((25.064 * self.rgb[2]) / 256)), 2)
+        cb = round((128 - ((37.945 * self.rgb[0]) / 256) - ((74.494 * self.rgb[1]) / 256) + ((112.439 * self.rgb[2]) / 256)), 2)
+        cr = round((128 + ((112.439 * self.rgb[0]) / 256) - ((94.154 * self.rgb[1]) / 256) - ((18.285 * self.rgb[2]) / 256)), 2)
+
+        return (y, cb, cr)
+    
+
+    @property
     def cmyk(self) -> tuple:
         if not self.__valid: return None
 
@@ -524,7 +557,7 @@ class HSL:
     """
 
     @staticmethod
-    def __checkIfHSL(value):
+    def __checkIfValid(value):
         if any([True for i in value if type(i) != int]): return False
 
         if value[0] < 0 or value[0] > 360: return False
@@ -536,7 +569,7 @@ class HSL:
 
 
     def __init__(self, hue: int, saturation: int, lightness: int):
-        if self.__checkIfHSL((hue, saturation, lightness)):
+        if self.__checkIfValid((hue, saturation, lightness)):
             self.hue = hue
             self.saturation = saturation
             self.lightness = lightness
@@ -623,6 +656,17 @@ class HSL:
     
 
     @property
+    def ycc(self) -> tuple:
+        if not self.__valid: return None
+
+        y = round((16 + ((65.738 * self.rgb[0]) / 256) + ((129.057 * self.rgb[1]) / 256) + ((25.064 * self.rgb[2]) / 256)), 2)
+        cb = round((128 - ((37.945 * self.rgb[0]) / 256) - ((74.494 * self.rgb[1]) / 256) + ((112.439 * self.rgb[2]) / 256)), 2)
+        cr = round((128 + ((112.439 * self.rgb[0]) / 256) - ((94.154 * self.rgb[1]) / 256) - ((18.285 * self.rgb[2]) / 256)), 2)
+
+        return (y, cb, cr)
+    
+
+    @property
     def cmyk(self) -> tuple:
         if not self.__valid: return None
 
@@ -683,7 +727,7 @@ class XYZ:
 
 
     @staticmethod
-    def __checkifXYZ(value):
+    def __checkIfValid(value):
         try: value = [float(i) for i in value if type(i) in [int, float]]
         except: return False
 
@@ -696,7 +740,7 @@ class XYZ:
 
         
     def __init__(self, x: float, y: float, z: float):
-        if self.__checkifXYZ((x, y, z)):
+        if self.__checkIfValid((x, y, z)):
             self.x = x
             self.y = y
             self.z = z
@@ -792,6 +836,17 @@ class XYZ:
     
 
     @property
+    def ycc(self) -> tuple:
+        if not self.__valid: return None
+
+        y = round((16 + ((65.738 * self.rgb[0]) / 256) + ((129.057 * self.rgb[1]) / 256) + ((25.064 * self.rgb[2]) / 256)), 2)
+        cb = round((128 - ((37.945 * self.rgb[0]) / 256) - ((74.494 * self.rgb[1]) / 256) + ((112.439 * self.rgb[2]) / 256)), 2)
+        cr = round((128 + ((112.439 * self.rgb[0]) / 256) - ((94.154 * self.rgb[1]) / 256) - ((18.285 * self.rgb[2]) / 256)), 2)
+
+        return (y, cb, cr)
+    
+
+    @property
     def cmyk(self):
         if not self.__valid: return None
 
@@ -826,6 +881,49 @@ class XYZ:
 
 
 
+class YCC:
+    """
+    CMYK color class object. 
+    Takes in cyan, magenta, yellow, and key values.
+
+    Attributes:
+        y (float): A float value between 0-255
+        cb (float): A float value between 0-255
+        cr (float): A float value between 0-255
+        
+  
+    Valid Examples:
+     - YCC(50.5, 32.24, 23)
+     - YCC(12.34, 34.6. 10)
+     - YCC(51.2, 30, 200.34)
+
+    Invalid Examples:
+     - YCC(-50.5, 0.24, 23)
+     - YCC(234.34, -34.6. 10)
+     - YCC(451.2, 30, 200.34)
+    """
+
+    @staticmethod
+    def __checkIfValid(value):
+        if any([True for i in value if type(i) != int]): return False
+        if len([i for i in value if i >= 0 and i <= 256]) != 3: return False
+        
+        return True
+    
+
+
+    def __init__(self, y, cb, cr):
+        if self.__checkIfValid((y, cb, cr)):
+            self.y = y
+            self.cb = cb
+            self.cr = cr
+            self.__valid = True
+        
+        else: self.__valid = False
+    
+
+
+
 class CMYK:
     """
     CMYK color class object. 
@@ -850,14 +948,14 @@ class CMYK:
     """
 
     @staticmethod
-    def __checkIfCMYK(value):
+    def __checkIfValid(value):
         if any([True for i in value if type(i) != int]): return False
         return len([i for i in list(value) if i >= 0 and i <= 100]) == 4
 
 
 
     def __init__(self, cyan: int, magenta: int, yellow: int, key: int):
-        if self.__checkIfCMYK((cyan, magenta, yellow, key)):
+        if self.__checkIfValid((cyan, magenta, yellow, key)):
             self.cyan = cyan
             self.magenta = magenta
             self.yellow = yellow
@@ -967,6 +1065,17 @@ class CMYK:
         z = round((rgb[0] * 1.93 + rgb[1] * 11.92 + rgb[2] * 95.05), 2)
 
         return (x, y, z)
+    
+
+    @property
+    def ycc(self) -> tuple:
+        if not self.__valid: return None
+
+        y = round((16 + ((65.738 * self.rgb[0]) / 256) + ((129.057 * self.rgb[1]) / 256) + ((25.064 * self.rgb[2]) / 256)), 2)
+        cb = round((128 - ((37.945 * self.rgb[0]) / 256) - ((74.494 * self.rgb[1]) / 256) + ((112.439 * self.rgb[2]) / 256)), 2)
+        cr = round((128 + ((112.439 * self.rgb[0]) / 256) - ((94.154 * self.rgb[1]) / 256) - ((18.285 * self.rgb[2]) / 256)), 2)
+
+        return (y, cb, cr)
     
 
     @property
