@@ -887,9 +887,9 @@ class YCC:
     Takes in cyan, magenta, yellow, and key values.
 
     Attributes:
-        y (float): An int or float value between 0-255
-        cb (float): An int or float value between 0-255
-        cr (float): An int or float value between 0-255
+        y (float): An float value between 0-255
+        cb (float): An float value between 0-255
+        cr (float): An float value between 0-255
         
   
     Valid Examples:
