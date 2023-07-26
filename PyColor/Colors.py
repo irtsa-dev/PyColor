@@ -741,9 +741,9 @@ class XYZ:
         
     def __init__(self, x: float, y: float, z: float):
         if self.__checkIfValid((x, y, z)):
-            self.x = x
-            self.y = y
-            self.z = z
+            self.x = float(x)
+            self.y = float(y)
+            self.z = float(z)
             self.__valid = True
         
         else: self.__valid = False         
@@ -887,9 +887,9 @@ class YCC:
     Takes in cyan, magenta, yellow, and key values.
 
     Attributes:
-        y (float): A float value between 0-255
-        cb (float): A float value between 0-255
-        cr (float): A float value between 0-255
+        y (float): An int or float value between 0-255
+        cb (float): An int or float value between 0-255
+        cr (float): An int or float value between 0-255
         
   
     Valid Examples:
@@ -905,21 +905,162 @@ class YCC:
 
     @staticmethod
     def __checkIfValid(value):
-        if any([True for i in value if type(i) != int]): return False
+        if any([True for i in value if type(i) not in [int, float]]): return False
         if len([i for i in value if i >= 0 and i <= 256]) != 3: return False
         
         return True
     
 
 
-    def __init__(self, y, cb, cr):
+    def __init__(self, y: float, cb: float, cr: float):
         if self.__checkIfValid((y, cb, cr)):
-            self.y = y
-            self.cb = cb
-            self.cr = cr
+            self.y = float(y)
+            self.cb = float(cb)
+            self.cr = float(cr)
             self.__valid = True
         
         else: self.__valid = False
+
+
+    @property
+    def rgb(self) -> tuple:
+        if not self.__valid: return None
+
+        r = int(round((self.y * 1.1643835616 + self.cr * 1.7927410714 - 248.100994), 3))
+        g = int(round((self.y * 1.1643835616 + self.cb * -0.2132486143 + self.cr * -0.5329093286 + 76.878080), 3))
+        b = int(round((self.y * 1.1643835616 + self.cb * 2.1124017857 - 289.017566), 3))
+        
+        return (r, g, b)
+    
+
+    @property
+    def hexidecimal(self) -> tuple:
+        if not self.__valid: return None
+
+        r = hex(self.rgb[0])[2:].upper()
+        g = hex(self.rgb[1])[2:].upper()
+        b = hex(self.rgb[2])[2:].upper()
+
+        return '#' + ''.join([r, g, b])
+    
+
+    @property
+    def hsv(self) -> tuple:
+        if not self.__valid: return None
+
+        red = self.rgb[0]
+        green = self.rgb[1]
+        blue = self.rgb[2]
+
+        M = max(red, green, blue)
+        m = min(red, green, blue)
+
+        V = (M / 255) * 100
+
+        S = 0
+        if M > 0: S = 100 - ((m / M) * 100)
+
+        try:
+            H = degrees(acos((red - (green / 2) - (blue / 2)) / sqrt((red ** 2) + (green ** 2) + (blue ** 2) - (red * green) - (red * blue) - (green * blue))))
+            if blue > green: H = 360 - H
+        except: H = 0
+        if H != 0: H -= 1
+
+        H = int(round(H))
+        S = int(round(S))
+        V = int(round(V))
+
+        return (H, S, V)
+
+
+    @property 
+    def hsl(self) -> tuple:
+        if not self.__valid: return None
+
+        red = self.rgb[0]
+        green = self.rgb[1]
+        blue = self.rgb[2]
+
+        M = max([red, green, blue])
+        m = min([red, green, blue])
+
+        M = max([(red / 255.0), (green / 255.0), (blue / 255.0)])
+        m = min([(red / 255.0), (green / 255.0), (blue / 255.0)])
+
+        C = M - m
+        L = (M + m) / 2.0
+
+        S = 0
+        if C != 0: S = ((C / (1.0 - abs((2.0 * L) - 1.0))) * 100.0)
+		
+        try:
+            H = degrees(acos((red - (green / 2) - (blue / 2)) / sqrt((red ** 2) + (green ** 2) + (blue ** 2) - (red * green) - (red * blue) - (green * blue))))
+            if blue > green: H = 360 - H
+        except: H = 0
+        if H != 0: H -= 1
+
+        H = int(round(H))
+        S = int(round(S))
+        L = int(round(L * 100.0))
+			
+        return (H, S, L)
+    
+
+    @property
+    def xyz(self) -> tuple:
+        if not self.__valid: return None
+
+        r = self.rgb[0] / 255.0
+        g = self.rgb[1] / 255.0
+        b = self.rgb[2] / 255.0
+
+        rgb = [(((i + 0.055) / 1.055) ** 2.4) if i > 0.04045 else (i / 12.92) for i in [r, g, b]]
+
+        x = round((rgb[0] * 41.24 + rgb[1] * 35.76 + rgb[2] * 18.05), 2)
+        y = round((rgb[0] * 21.26 + rgb[1] * 71.52 + rgb[2] * 7.22), 2)
+        z = round((rgb[0] * 1.93 + rgb[1] * 11.92 + rgb[2] * 95.05), 2)
+
+        return (x, y, z)
+    
+
+    @property
+    def ycc(self) -> tuple:
+        if not self.__valid: return None
+        return (self.y, self.cb, self.cr)
+    
+
+    @property
+    def cmyk(self) -> tuple:
+        if not self.__valid: return None
+
+        nr = self.rgb[0] / 255.0
+        ng = self.rgb[1] / 255.0
+        nb = self.rgb[2] / 255.0
+
+        K = 1.0 - max(nr, ng, nb)
+
+        C = int(round(((1 - nr - K) / (1 - K) * 100)))
+        M = int(round(((1 - ng - K) / (1 - K) * 100)))
+        Y = int(round(((1 - nb - K) / (1 - K) * 100)))
+        K = int(round(K * 100))
+
+        return (C, M, Y, K)
+
+    
+    @property
+    def percentForm(self) -> tuple:
+        if not self.__valid: return None
+
+        y = round((self.cyan / 255.0), 2)
+        cb = round((self.magenta / 255.0), 2)
+        cr = round((self.yellow / 255.0), 2)
+
+        return (y, cb, cr)
+    
+
+    def __repr__(self):
+        if not self.__valid: return 'Invalid YCC'
+        return str(self.y) + ' ' + str(self.cb) + ' ' + str(self.cr)
     
 
 
