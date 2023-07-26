@@ -5,7 +5,7 @@ A [**python**](https://www.python.org) collection of classes and functions to co
 - **HSV** (*hue*, *saturation*, *value*)
 - **HSL** (*hue*, *saturation*, *lightness*)
 - **XYZ** (*x*, *y*, *z*)
-- **YCC** (*y*, *cb*, *cr*
+- **YCC** (*y*, *cb*, *cr*)
 - **CMYK** (*cyan*, *magenta*, *yellow*, *key*)
 - **HEX** (*hexidecimal*)
 <br />
