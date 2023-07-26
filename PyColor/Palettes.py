@@ -7,7 +7,7 @@
 
 #Imports
 from random import randint
-from PyColor.Colors import RGB, HEX, HSV, HSL, XYZ, CMYK
+from PyColor.Colors import *
 
 
 
@@ -15,23 +15,25 @@ from PyColor.Colors import RGB, HEX, HSV, HSL, XYZ, CMYK
 
 
 #Functions
-def __convertFormat(targetFormat: str, current: RGB | HEX | HSV | HSL | XYZ | CMYK):
+def __convertFormat(targetFormat: str, current: RGB | HEX | HSV | HSL | XYZ | YCC | CMYK):
     match targetFormat:
         case 'RGB': return RGB(*current.rgb)
         case 'HEX' : return HEX(*current.hexidecimal)
         case 'HSV' : return HSV(*current.hsv)
         case 'HSL' : return HSL(*current.hsl)
         case 'XYZ' : return XYZ(*current.xyz)
+        case 'YCC' : return YCC(*current.ycc)
         case 'CMYK' : return CMYK(*current.cmyk)
 
 
 
-def __convertClassToString(Color: RGB | HEX | HSV | HSL | CMYK):
+def __convertClassToString(Color: RGB | HEX | HSV | HSL | XYZ | YCC | CMYK):
     if type(Color) == RGB: return 'RGB'
     if type(Color) == HEX: return 'HEX'
     if type(Color) == HSV: return 'HSV'
     if type(Color) == HSL: return 'HSL'
     if type(Color) == XYZ: return 'XYZ'
+    if type(Color) == YCC: return 'YCC'
     if type(Color) == CMYK: return 'CMYK'
 
 
@@ -43,12 +45,12 @@ def __capNumber(cap: int, number: int):
 
 
 
-def GeneratePalette(Color: RGB | HEX | HSV | HSL | XYZ | CMYK, scheme: str) -> list:
+def GeneratePalette(Color: RGB | HEX | HSV | HSL | XYZ | YCC | CMYK, scheme: str) -> list:
     """
     Function to generate a color pallete given a Color class object and a scheme.
 
     Attributes:
-        Color (RGB | HEX | HSV | HSL | XYZ | CMYK): Color to generate pallete from.
+        Color (RGB | HEX | HSV | HSL | XYZ | YCC | CMYK): Color to generate pallete from.
         scheme (str): Scheme to use for the pallete, must be one of the supported schemes.
 
     
@@ -62,7 +64,7 @@ def GeneratePalette(Color: RGB | HEX | HSV | HSL | XYZ | CMYK, scheme: str) -> l
      - random
     """
     
-    if type(Color) not in [RGB, HEX, HSV, HSL, XYZ, CMYK]: return 'Invalid Color Type'
+    if type(Color) not in [RGB, HEX, HSV, HSL, XYZ, YCC, CMYK]: return 'Invalid Color Type'
     if scheme not in ['monochromatic', 'analogous', 'complimentary', 'splitcomplimentary', 'tetrad', 'triad', 'random']: return 'Invalid Scheme Provided'
 
 
