@@ -138,8 +138,8 @@ class RGB:
         z = round((rgb[0] * 1.93 + rgb[1] * 11.92 + rgb[2] * 95.05), 2)
 
         return (x, y, z)
-    
 
+      
     @property
     def ycc(self) -> tuple:
         if not self.__valid: return None
@@ -315,7 +315,7 @@ class HEX:
 
         return (x, y, z)
 
-
+      
     @property
     def ycc(self) -> tuple:
         if not self.__valid: return None
@@ -325,7 +325,7 @@ class HEX:
         cr = round((128 + ((112.439 * self.rgb[0]) / 256) - ((94.154 * self.rgb[1]) / 256) - ((18.285 * self.rgb[2]) / 256)), 2)
 
         return (y, cb, cr)
-        
+      
 
     @property
     def cmyk(self):
