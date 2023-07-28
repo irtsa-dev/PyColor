@@ -1,4 +1,4 @@
-![PyPI](https://img.shields.io/pypi/v/idev-pycolor)
+ ![PyPI](https://img.shields.io/pypi/v/idev-pycolor)
 # PyColor
 A [**python**](https://www.python.org) collection of classes and functions to convert between **rgb**, **hsv**, **hsl**, **xyz**, **ycc**, **cmyk** and **hex** color formats and generate palettes from said colors.
 <br />
@@ -14,7 +14,7 @@ A [**python**](https://www.python.org) collection of classes and functions to co
 <br />
 
 ## Installation
-With `git` [GitHub](https://github.com):
+With `git` [GitHub](https://github.com/IrtsaDevelopment/PyColor):
 ```
 git clone https://github.com/IrtsaDevelopment/PyColor.git
 ```
