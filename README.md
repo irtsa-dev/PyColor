@@ -14,11 +14,11 @@ A [**python**](https://www.python.org) collection of classes and functions to co
 <br />
 
 ## Installation
-With `git`:
+With `git` [GitHub](https://github.com):
 ```
 git clone https://github.com/IrtsaDevelopment/PyColor.git
 ```
-or with `pip`:
+or with `pip` [PyPi](https://pypi.org/project/idev-pycolor/):
 ```
 pip install idev-pycolor
 ```
