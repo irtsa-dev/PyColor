@@ -187,7 +187,7 @@ class RGB:
         gv = int(round((self.red + self.green + self.blue) / 3.0))
 
         return RGB(gv, gv, gv)
-    
+
 
     @property
     def greyscale(self) -> tuple: return self.grayscale
@@ -338,7 +338,6 @@ class HEX:
         cr = round((128 + ((112.439 * self.rgb[0]) / 256) - ((94.154 * self.rgb[1]) / 256) - ((18.285 * self.rgb[2]) / 256)), 2)
 
         return (y, cb, cr)
-
       
 
     @property
@@ -357,7 +356,6 @@ class HEX:
         K = int(round(K * 100))
 
         return (C, M, Y, K)
-
 
 
     @property
