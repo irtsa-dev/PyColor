@@ -1,3 +1,4 @@
+ ![PyPI](https://img.shields.io/pypi/v/idev-pycolor)
 # PyColor
 A [**python**](https://www.python.org) collection of classes and functions to convert between **rgb**, **hsv**, **hsl**, **xyz**, **ycc**, **cmyk** and **hex** color formats and generate palettes from said colors.
 <br />
@@ -8,6 +9,20 @@ A [**python**](https://www.python.org) collection of classes and functions to co
 - **YCC** (*y*, *cb*, *cr*)
 - **CMYK** (*cyan*, *magenta*, *yellow*, *key*)
 - **HEX** (*hexidecimal*)
+<br />
+<br />
+<br />
+
+## Installation
+With `git` [GitHub](https://github.com/IrtsaDevelopment/PyColor):
+```
+git clone https://github.com/IrtsaDevelopment/PyColor.git
+```
+or with `pip` [PyPi](https://pypi.org/project/idev-pycolor/):
+```
+pip install idev-pycolor
+```
+<br />
 <br />
 <br />
 <br />
@@ -237,14 +252,3 @@ The following are the currently supports schemes for the `GeneratePalette` funct
 - tetrad
 - triad
 - random
-
-​
-<br />
-<br />
-​<br />
-<br />
-<br />
-## Installation
-```sh
-git clone https://github.com/IrtsaDevelopment/PyColor.git
-```
