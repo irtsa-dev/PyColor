@@ -65,6 +65,10 @@ rgb.hexidecimal
 
 rgb.percentForm
 # Returns a tuple of the rgb values in a decimal percent form (0-1).
+rgb.grayscale
+# Returns a grayscaled version of the RGB class.
+rgb.greyscale
+# Is .grayscale
 ```
 ```py
 hsv.rgb
@@ -84,6 +88,10 @@ hsv.hexidecimal
 
 hsv.percentForm
 # Returns a tuple of the hsv values in a decimal percent form (0-1).
+hsv.grayscale
+# Returns a grayscaled version of the HSV class.
+hsv.greyscale
+# Is .grayscale
 ```
 ```py
 hsl.rgb
@@ -103,6 +111,10 @@ hsl.hexidecimal
 
 hsl.percentForm
 # Returns a tuple of the hsl values in a decimal percent form (0-1).
+hsl.grayscale
+# Returns a grayscaled version of the HSL class.
+hsl.greyscale
+# Is .grayscale
 ```
 ```py
 xyz.rgb
@@ -122,6 +134,10 @@ xyz.hexidecimal
 
 xyz.percentForm
 # Returns a tuple of the xyz values in a decimal percent form (0-1).
+xyz.grayscale
+# Returns a grayscaled version of the XYZ class.
+xyz.greyscale
+# Is .grayscale
 ```
 ```py
 ycc.rgb
@@ -139,8 +155,12 @@ ycc.cmyk
 ycc.hexidecimal
 # Returns a string of the hexidecimal value from ycc.
 
-hsl.percentForm
+ycc.percentForm
 # Returns a tuple of the ycc values in a decimal percent form (0-1).
+ycc.grayscale
+# Returns a grayscaled version of the YCC class.
+ycc.greyscale
+# Is .grayscale
 ```
 ```py
 cmyk.rgb
@@ -160,6 +180,10 @@ cmyk.hexidecimal
 
 cmyk.percentForm
 # Returns a tuple of the cmyk values in a decimal percent form (0-1).
+cmyk.grayscale
+# Returns a grayscaled version of the CMYK class.
+cmyk.greyscale
+# Is .grayscale
 ```
 ```py
 hexidecimal.rgb
@@ -179,6 +203,10 @@ hexidecimal.hexidecimal
 
 hexidecimal.percentForm
 # Returns a decimal percent form (0-1) of the hexidecimal value.
+hexidecimal.grayscale
+# Returns a grayscaled version of the HEX class.
+hexidecimal.greyscale
+# Is .grayscale
 ```
 ```py
 print(rgb)
