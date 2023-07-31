@@ -178,6 +178,15 @@ class RGB:
         b = round((self.blue / 255.0), 2)
 
         return (r, g, b)
+    
+
+    @property
+    def grayscale(self) -> tuple:
+        if not self.__valid: return None
+
+        gv = int(round((self.red + self.green + self.blue) / 3.0))
+
+        return RGB(gv, gv, gv)
         
 
 
@@ -325,6 +334,16 @@ class HEX:
         cr = round((128 + ((112.439 * self.rgb[0]) / 256) - ((94.154 * self.rgb[1]) / 256) - ((18.285 * self.rgb[2]) / 256)), 2)
 
         return (y, cb, cr)
+    
+
+    @property
+    def grayscale(self) -> tuple:
+        if not self.__valid: return None
+
+        gv = int(round((self.rgb[0] + self.rgb[1] + self.rgb[2]) / 3.0))
+        rgbGray = RGB(gv, gv, gv)
+
+        return HEX(rgbGray.hexidecimal)
       
 
     @property
@@ -526,6 +545,20 @@ class HSV:
         return (h, s, v)
     
 
+    @property
+    def grayscale(self) -> tuple:
+        if not self.__valid: return None
+
+        gv = int(round((self.rgb[0] + self.rgb[1] + self.rgb[2]) / 3.0))
+        rgbGray = RGB(gv, gv, gv)
+
+        return HSV(*rgbGray.hsv)
+    
+
+    @property
+    def greyscale(self) -> tuple: return self.grayscale
+    
+
 
     def __repr__(self):
         if not self.__valid: return 'Invalid HSV'
@@ -693,6 +726,20 @@ class HSL:
         l = round((self.lightness / 100.0), 2)
 
         return (h, s, l)
+    
+
+    @property
+    def grayscale(self) -> tuple:
+        if not self.__valid: return None
+
+        gv = int(round((self.rgb[0] + self.rgb[1] + self.rgb[2]) / 3.0))
+        rgbGray = RGB(gv, gv, gv)
+
+        return HSL(*rgbGray.hsl)
+    
+
+    @property
+    def greyscale(self) -> tuple: return self.grayscale
     
 
 
@@ -871,6 +918,20 @@ class XYZ:
         z = round((self.z / 108.9), 2)
 
         return (x, y, z)
+    
+
+    @property
+    def grayscale(self) -> tuple:
+        if not self.__valid: return None
+
+        gv = int(round((self.rgb[0] + self.rgb[1] + self.rgb[2]) / 3.0))
+        rgbGray = RGB(gv, gv, gv)
+
+        return XYZ(*rgbGray.xyz)
+    
+
+    @property
+    def greyscale(self) -> tuple: return self.grayscale
 
 
 
@@ -930,9 +991,9 @@ class YCC:
         g = int(round((self.y * 1.1643835616 + self.cb * -0.2132486143 + self.cr * -0.5329093286 + 76.878080), 3))
         b = int(round((self.y * 1.1643835616 + self.cb * 2.1124017857 - 289.017566), 3))
 
-	r = max(0, min(255, r))
-	g = max(0, min(255, g))
-	b = max(0, min(255, b))
+        r = max(0, min(255, r))
+        g = max(0, min(255, g))
+        b = max(0, min(255, b))
         
         return (r, g, b)
     
@@ -1060,6 +1121,20 @@ class YCC:
         cr = round((self.yellow / 255.0), 2)
 
         return (y, cb, cr)
+    
+
+    @property
+    def grayscale(self) -> tuple:
+        if not self.__valid: return None
+
+        gv = int(round((self.rgb[0] + self.rgb[1] + self.rgb[2]) / 3.0))
+        rgbGray = RGB(gv, gv, gv)
+
+        return YCC(*rgbGray.ycc)
+    
+
+    @property
+    def greyscale(self) -> tuple: return self.grayscale
     
 
     def __repr__(self):
@@ -1239,6 +1314,20 @@ class CMYK:
         k = round((self.key / 100.0), 2)
 
         return (c, m, y, k)
+    
+
+    @property
+    def grayscale(self) -> tuple:
+        if not self.__valid: return None
+
+        gv = int(round((self.rgb[0] + self.rgb[1] + self.rgb[2]) / 3.0))
+        rgbGray = RGB(gv, gv, gv)
+
+        return CMYK(*rgbGray.cmyk)
+    
+
+    @property
+    def greyscale(self) -> tuple: return self.grayscale
 
 
     
