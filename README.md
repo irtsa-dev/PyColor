@@ -1,6 +1,6 @@
  ![PyPI](https://img.shields.io/pypi/v/idev-pycolor) ![Python](https://img.shields.io/pypi/pyversions/idev-pycolor)
 # PyColor
-A [**python**](https://www.python.org) collection of classes and functions to convert between **rgb**, **hsv**, **hsl**, **xyz**, **ycc**, **cmyk** and **hex** color formats and generate palettes from said colors.
+A [**python**](https://www.python.org) collection of classes and functions to convert between multiple color models, generate palettes, and more.
 <br />
 - **RGB** (*red*, *green*, *blue*)
 - **HSV** (*hue*, *saturation*, *value*)
