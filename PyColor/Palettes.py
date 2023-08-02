@@ -14,7 +14,7 @@ from PyColor.Colors import *
 
 
 
-#Functions
+#Private Functions
 def __convertFormat(targetFormat: str, current: RGB | HEX | HSV | HSL | XYZ | YCC | CMYK):
     match targetFormat:
         case 'RGB': return RGB(*current.rgb)
@@ -45,6 +45,8 @@ def __capNumber(cap: int, number: int):
 
 
 
+
+#Public Functions
 def GeneratePalette(Color: RGB | HEX | HSV | HSL | XYZ | YCC | CMYK, scheme: str) -> list:
     """
     Function to generate a color pallete given a Color class object and a scheme.
