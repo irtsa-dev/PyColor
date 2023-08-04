@@ -422,9 +422,9 @@ class HSV:
     def __checkIfValid(value):
         if any([True for i in value if type(i) not in [int, float]]): return False
 
-        if value[0] == float: value[0] *= 360
-        if value[1] == float: value[1] *= 100
-        if value[2] == float: value[2] *= 100
+        if type(value[0]) == float: value[0] *= 360
+        if type(value[1]) == float: value[1] *= 100
+        if type(value[2]) == float: value[2] *= 100
 
         if value[0] < 0 or value[0] > 360: return False
         if value[1] < 0 or value[1] > 100: return False
@@ -615,9 +615,9 @@ class HSL:
     def __checkIfValid(value):
         if any([True for i in value if type(i) not in [int, float]]): return False
 
-        if value[0] == float: value[0] *= 360
-        if value[1] == float: value[1] *= 100
-        if value[2] == float: value[2] *= 100
+        if type(value[0]) == float: value[0] *= 360
+        if type(value[1]) == float: value[1] *= 100
+        if type(value[2]) == float: value[2] *= 100
 
         if value[0] < 0 or value[0] > 360: return False
         if value[1] < 0 or value[1] > 100: return False
