@@ -421,6 +421,7 @@ class HSV:
     @staticmethod
     def __checkIfValid(value):
         if any([True for i in value if type(i) not in [int, float]]): return False
+        value = list(value)
 
         if type(value[0]) == float: value[0] *= 360
         if type(value[1]) == float: value[1] *= 100
@@ -614,6 +615,7 @@ class HSL:
     @staticmethod
     def __checkIfValid(value):
         if any([True for i in value if type(i) not in [int, float]]): return False
+        value = list(value)
 
         if type(value[0]) == float: value[0] *= 360
         if type(value[1]) == float: value[1] *= 100
