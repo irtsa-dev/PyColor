@@ -1,6 +1,6 @@
  ![PyPI](https://img.shields.io/pypi/v/idev-pycolor) ![Python](https://img.shields.io/pypi/pyversions/idev-pycolor)
 # PyColor
-A [**python**](https://www.python.org) collection of classes and functions to convert between **rgb**, **hsv**, **hsl**, **xyz**, **ycc**, **cmyk** and **hex** color formats and generate palettes from said colors.
+A [**python**](https://www.python.org) collection of classes and functions to convert between multiple color models, generate palettes, and more.
 <br />
 - **RGB** (*red*, *green*, *blue*)
 - **HSV** (*hue*, *saturation*, *value*)
@@ -33,6 +33,7 @@ pip install idev-pycolor
 To import, simply put:
 ```py
 from PyColor.Colors import *
+from PyColor.Functions import *
 from PyColor.Palettes import GeneratePalette
 ```
 <br />
@@ -235,6 +236,12 @@ print(hexidecimal)
 ```py
 GeneratePalette(RGB(100, 100, 100), 'triad')
 # Will generate a palette in the form of a list of colors in the same type of class given using the scheme provided.
+
+Interpolate([RGB(100, 100, 100), RGB(150, 150, 150)])
+# Will interpolate colors that should go in between the ones given and return as a list of RGB objects.
+
+InterpolateFormat([HSV(320, 50, 100), HSV(150, 100, 60)])
+# Will interpolate colors that should go in between the ones given and return a list of color objects similar to the provided ones.
 ```
 ​
 <br />
