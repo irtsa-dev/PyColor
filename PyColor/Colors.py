@@ -20,9 +20,9 @@ class RGB:
     Takes in a red, green, and blue value between 0-255
 
     Attributes:
-        red (int): An integer value between 0-255.
-        green (int): An integer value between 0-255.
-        blue (int): An integer value between 0-255.
+        red (int): An integer value between 0-255 or float value between 0-1.
+        green (int): An integer value between 0-255 or float value between 0-1.
+        blue (int): An integer value between 0-255 or float value between 0-1.
 
     Valid Examples:
      - RGB(100, 100, 100)
@@ -37,15 +37,21 @@ class RGB:
     
     @staticmethod
     def __checkIfValid(value):
-        if any([True for i in value if type(i) != int]): return False
+        if any([True for i in value if type(i) not in [int, float]]): return False
+        value = [int(i * 255) if type(i) == float else int(i) for i in value]
         if len([i for i in value if i >= 0 and i <= 256]) != 3: return False
 
         return True
 
 
 
-    def __init__(self, red: int, green: int, blue: int):
+    def __init__(self, red: int | float, green: int | float, blue: int | float, notPercent: bool = False):
         if self.__checkIfValid((red, green, blue)):
+            if not notPercent:
+                if type(red) == float: red = int(red * 255)
+                if type(green) == float: green = int(green * 255)
+                if type(blue) == float: blue = int(blue * 255)
+
             self.red = red
             self.green = green
             self.blue = blue
@@ -396,9 +402,9 @@ class HSV:
     Takes in hue, saturation, and value values.
 
     Attributes:
-        hue (int): An integer value between 0-360.
-        saturation (int): An integer value between 0-100.
-        value (int): An integer value between 0-100.
+        hue (int | float): An integer value between 0-360 or float value between 0-1.
+        saturation (int | float): An integer value between 0-100 or float value between 0-1.
+        value (int | float): An integer value between 0-100 or float value between 0-1.
 
         
     Valid Examples:
@@ -414,7 +420,12 @@ class HSV:
     
     @staticmethod
     def __checkIfValid(value):
-        if any([True for i in value if type(i) != int]): return False
+        if any([True for i in value if type(i) not in [int, float]]): return False
+        value = list(value)
+
+        if type(value[0]) == float: value[0] *= 360
+        if type(value[1]) == float: value[1] *= 100
+        if type(value[2]) == float: value[2] *= 100
 
         if value[0] < 0 or value[0] > 360: return False
         if value[1] < 0 or value[1] > 100: return False
@@ -424,8 +435,13 @@ class HSV:
 
 
 
-    def __init__(self, hue: int, saturation: int, value: int):
+    def __init__(self, hue: int | float, saturation: int | float, value: int | float, notPercent: bool = False):
         if self.__checkIfValid((hue, saturation, value)):
+            if not notPercent:
+                if type(hue) == float: hue = int(hue * 360)
+                if type(saturation) == float: saturation = int(saturation * 100)
+                if type(value) == float: value = int(value * 100)
+
             self.hue = hue
             self.saturation = saturation
             self.value = value
@@ -580,9 +596,9 @@ class HSL:
     Takes in hue, saturation, and lightness values.
 
     Attributes:
-        hue (int): An integer value between 0-360.
-        saturation (int): An integer value between 0-100.
-        lightness (int): An integer value between 0-100.
+        hue (int | float): An integer value between 0-360 or float value between 0-1.
+        saturation (int | float): An integer value between 0-100 or float value between 0-1.
+        lightness (int | float): An integer value between 0-100 or float value between 0-1.
 
         
     Valid Examples:
@@ -598,7 +614,12 @@ class HSL:
 
     @staticmethod
     def __checkIfValid(value):
-        if any([True for i in value if type(i) != int]): return False
+        if any([True for i in value if type(i) not in [int, float]]): return False
+        value = list(value)
+
+        if type(value[0]) == float: value[0] *= 360
+        if type(value[1]) == float: value[1] *= 100
+        if type(value[2]) == float: value[2] *= 100
 
         if value[0] < 0 or value[0] > 360: return False
         if value[1] < 0 or value[1] > 100: return False
@@ -608,8 +629,13 @@ class HSL:
 
 
 
-    def __init__(self, hue: int, saturation: int, lightness: int):
+    def __init__(self, hue: int | float, saturation: int | float, lightness: int | float, notPercent: bool = False):
         if self.__checkIfValid((hue, saturation, lightness)):
+            if not notPercent:
+                if type(hue) == float: hue = int(hue * 360)
+                if type(saturation) == float: saturation = int(saturation * 100)
+                if type(lightness) == float: lightness = int(lightness * 100)
+
             self.hue = hue
             self.saturation = saturation
             self.lightness = lightness
@@ -763,9 +789,9 @@ class XYZ:
     Takes in cyan, magenta, yellow, and key values.
 
     Attributes:
-        x (float): A float value between 0-95.05.
-        y (float): A float value between 0-100.0.
-        z (float): A float value between 0-108.9.
+        x (float): A float value between 0-95.05 or 0-1.
+        y (float): A float value between 0-100.0 or 0-1.
+        z (float): A float value between 0-108.9 or 0-1.
 
         
     Valid Examples:
@@ -788,16 +814,23 @@ class XYZ:
         if len(value) != 3: return False
         if any([True for i in value if i < 0]): return False
         if value[0] > 95.05 or value[1] > 100 or value[2] > 108.9: return False
-        
+
         return True
 
 
         
-    def __init__(self, x: float, y: float, z: float):
+    def __init__(self, x: float, y: float, z: float, notPercent: bool = False):
         if self.__checkIfValid((x, y, z)):
-            self.x = float(x)
-            self.y = float(y)
-            self.z = float(z)
+            if all([True if i >= 0 and i <= 1 else False for i in (x, y, z)]) and not notPercent:
+                self.x = round((x * 95.05), 2)
+                self.y = round((y * 100.0), 2)
+                self.z = round((z * 108.9), 2)
+            
+            else:
+                self.x = round(x, 2)
+                self.y = round(y, 2)
+                self.z = round(z, 2)
+            
             self.__valid = True
         
         else: self.__valid = False         
@@ -955,9 +988,9 @@ class YCC:
     Takes in cyan, magenta, yellow, and key values.
 
     Attributes:
-        y (float): An float value between 0-255
-        cb (float): An float value between 0-255
-        cr (float): An float value between 0-255
+        y (float): An float value between 0-255 or 0-1.
+        cb (float): An float value between 0-255 or 0-1.
+        cr (float): An float value between 0-255 or 0-1.
         
   
     Valid Examples:
@@ -974,14 +1007,20 @@ class YCC:
     @staticmethod
     def __checkIfValid(value):
         if any([True for i in value if type(i) not in [int, float]]): return False
+        value = [int(i * 255) if type(i) == float else i for i in value]
         if len([i for i in value if i >= 0 and i <= 256]) != 3: return False
         
         return True
     
 
 
-    def __init__(self, y: float, cb: float, cr: float):
+    def __init__(self, y: float, cb: float, cr: float, notPercent: bool = False):
         if self.__checkIfValid((y, cb, cr)):
+            if not notPercent:
+                if type(y) == float: y = int(y * 255)
+                if type(cb) == float: cb = int(cb * 255)
+                if type(cr) == float: cr = int(cr * 255)
+
             self.y = float(y)
             self.cb = float(cb)
             self.cr = float(cr)
@@ -1157,10 +1196,10 @@ class CMYK:
     Takes in cyan, magenta, yellow, and key values.
 
     Attributes:
-        cyan (int): An integer value between 0-100.
-        magenta (int): An integer value between 0-100.
-        yellow (int): An integer value between 0-100.
-        key (int): An integer value between 0-100.
+        cyan (int | float): An integer value between 0-100 or float value between 0-1.
+        magenta (int | float): An integer value between 0-100 or float value between 0-1.
+        yellow (int | float): An integer value between 0-100 or float value between 0-1.
+        key (int | float): An integer value between 0-100 or float value between 0-1.
 
         
     Valid Examples:
@@ -1176,13 +1215,20 @@ class CMYK:
 
     @staticmethod
     def __checkIfValid(value):
-        if any([True for i in value if type(i) != int]): return False
-        return len([i for i in list(value) if i >= 0 and i <= 100]) == 4
+        if any([True for i in value if type(i) not in [int, float]]): return False
+        value = [int(i * 100) if type(i) == float else i for i in value]
+        return len([i for i in value if i >= 0 and i <= 100]) == 4
 
 
 
-    def __init__(self, cyan: int, magenta: int, yellow: int, key: int):
+    def __init__(self, cyan: int | float, magenta: int | float, yellow: int | float, key: int | float, notPercent: bool = False):
         if self.__checkIfValid((cyan, magenta, yellow, key)):
+            if not notPercent:
+                if type(cyan) == float: cyan = int(cyan * 100)
+                if type(magenta) == float: magenta = int(magenta * 100)
+                if type(yellow) == float: yellow = int(yellow * 100)
+                if type(key) == float: key = int(key * 100)
+
             self.cyan = cyan
             self.magenta = magenta
             self.yellow = yellow
