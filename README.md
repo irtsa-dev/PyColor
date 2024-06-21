@@ -16,7 +16,7 @@ A [**python**](https://www.python.org) collection of classes and functions to co
 ## Installation
 With `git` [GitHub](https://github.com/IrtsaDevelopment/PyColor):
 ```
-git clone https://github.com/IrtsaDevelopment/PyColor.git
+git clone https://github.com/irtsa-dev/PyColor.git
 ```
 or with `pip` [PyPi](https://pypi.org/project/idev-pycolor/):
 ```
