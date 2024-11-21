@@ -70,9 +70,9 @@ class RGB:
     def hexidecimal(self) -> str:
         if not self.__valid: return None
 
-        r = hex(self.red)[2:].upper()
-        g = hex(self.green)[2:].upper()
-        b = hex(self.blue)[2:].upper()
+        r = hex(self.red)[2:].zfill(2).upper()
+        g = hex(self.green)[2:].zfill(2).upper()
+        b = hex(self.blue)[2:].zfill(2).upper()
 
         return '#' + ''.join([r, g, b])
 
@@ -479,9 +479,9 @@ class HSV:
     def hexidecimal(self) -> str:
         if not self.__valid: return None
 
-        r = hex(self.rgb[0])[2:].upper()
-        g = hex(self.rgb[1])[2:].upper()
-        b = hex(self.rgb[2])[2:].upper()
+        r = hex(self.rgb[0])[2:].zfill(2).upper()
+        g = hex(self.rgb[1])[2:].zfill(2).upper()
+        b = hex(self.rgb[2])[2:].zfill(2).upper()
 
         return '#' + ''.join([r, g, b])
     
@@ -676,9 +676,9 @@ class HSL:
     def hexidecimal(self) -> str:
         if not self.__valid: return None
 
-        r = hex(self.rgb[0])[2:].upper()
-        g = hex(self.rgb[1])[2:].upper()
-        b = hex(self.rgb[2])[2:].upper()
+        r = hex(self.rgb[0])[2:].zfill(2).upper()
+        g = hex(self.rgb[1])[2:].zfill(2).upper()
+        b = hex(self.rgb[2])[2:].zfill(2).upper()
 
         return '#' + ''.join([r, g, b])
     
@@ -857,9 +857,9 @@ class XYZ:
     def hexidecimal(self) -> str:
         if not self.__valid: return None
 
-        r = hex(self.rgb[0])[2:].upper()
-        g = hex(self.rgb[1])[2:].upper()
-        b = hex(self.rgb[2])[2:].upper()
+        r = hex(self.rgb[0])[2:].zfill(2).upper()
+        g = hex(self.rgb[1])[2:].zfill(2).upper()
+        b = hex(self.rgb[2])[2:].zfill(2).upper()
 
         return '#' + ''.join([r, g, b])
     
@@ -1048,9 +1048,9 @@ class YCC:
     def hexidecimal(self) -> tuple:
         if not self.__valid: return None
 
-        r = hex(self.rgb[0])[2:].upper()
-        g = hex(self.rgb[1])[2:].upper()
-        b = hex(self.rgb[2])[2:].upper()
+        r = hex(self.rgb[0])[2:].zfill(2).upper()
+        g = hex(self.rgb[1])[2:].zfill(2).upper()
+        b = hex(self.rgb[2])[2:].zfill(2).upper()
 
         return '#' + ''.join([r, g, b])
     
@@ -1254,9 +1254,9 @@ class CMYK:
     def hexidecimal(self) -> str:
         if not self.__valid: return None
 
-        r = hex(self.rgb[0])[2:].upper()
-        g = hex(self.rgb[1])[2:].upper()
-        b = hex(self.rgb[2])[2:].upper()
+        r = hex(self.rgb[0])[2:].zfill(2).upper()
+        g = hex(self.rgb[1])[2:].zfill(2).upper()
+        b = hex(self.rgb[2])[2:].zfill(2).upper()
 
         return '#' + ''.join([r, g, b])
     
